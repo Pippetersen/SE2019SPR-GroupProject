@@ -14,8 +14,11 @@ public class Lab6 {
     /**
      * @param args the command line arguments
      */
+    
+    //This is a change to show a difference in file comment.
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Ixar Dixane");
     }
     
 }
