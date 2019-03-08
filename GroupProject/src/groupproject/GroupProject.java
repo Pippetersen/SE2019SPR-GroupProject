@@ -20,8 +20,10 @@ public class GroupProject {
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
+        /*    Testing to create a file that saves teh data at the end and upon restart load that data back
         ArrayList<Customer> client = new ArrayList<>();
         FileData list = new FileData();
+        
         list.LoadData(client);    
         
         for(Customer hold : client)
@@ -43,6 +45,7 @@ public class GroupProject {
             System.out.println(hold.toString());
 
         list.SaveData(client);
+        */
     }
     
 }
