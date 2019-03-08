@@ -1,109 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
  * @author clone-sniper
  */
-@Entity
-@Table(name = "CUSTOMER")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
-    , @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c WHERE c.id = :id")
-    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name = :name")
-    , @NamedQuery(name = "Customer.findByPhoneNumber", query = "SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")})
-public class Customer implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
-    @Column(name = "NAME")
-    private String name;
-    @Column(name = "PHONE_NUMBER")
-    private String phoneNumber;
-    @Column(name = "EMAIL")
-    private String email;
-
+public class Customer implements Serializable{
+    private String Name, Email, PhoneNumber;
+    
+    //Constructor
+    public Customer(String name, String mail, String number)
+    {
+        Name = name;
+        Email = mail;
+        PhoneNumber = number;
+    }
     public Customer() {
+       Name = null;
+       Email = null;
+       PhoneNumber = null;
     }
-
-    public Customer(Integer id) {
-        this.id = id;
+    //Getters
+    public String getName()
+    {
+        return Name;
     }
-
-    public Integer getId() {
-        return id;
+    public String getMail()
+    {
+        return Email;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public String getNumber()
+    {
+        return PhoneNumber;
     }
-
-    public String getName() {
-        return name;
+    //Setters
+    public void setName(String name)
+    {
+        Name = name;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setMail(String mail)
+    {
+        Email = mail;
     }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public void setPhoneNumber(String number)
+    {
+        PhoneNumber = number;
     }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
-            return false;
-        }
-        Customer other = (Customer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
+   
     @Override
     public String toString() {
-        return "Customer Id= " + id + " | Customer Name: " + name + " | Customer Phone Number: " + phoneNumber + " | Customer Email: " + email;
+        return " | Customer Name: " + Name + " | Customer Phone Number: " + PhoneNumber + " | Customer Email: " + Email;
     }
-    
 }
