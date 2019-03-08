@@ -19,7 +19,7 @@ public class FileData {
     //Loads Customer data from Byte File called Customer's Data
     public void LoadData(ArrayList<Customer> client) throws IOException, ClassNotFoundException
     {
-        if(new File("Customer's Data").exists())
+        if(new File("Customer's Data").exists())   //Checks if a file exist and loads the data if it does
         {
             FileInputStream in = null;
             Customer holder = null;
@@ -28,7 +28,7 @@ public class FileData {
             in = new FileInputStream("Customer's Data");
             ObjectInputStream s = new ObjectInputStream(in);
 
-            while(in.available() > 0)
+            while(in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
             {
                holder = (Customer)s.readObject();
                client.add(holder);
@@ -62,7 +62,7 @@ public class FileData {
             {
                 f = new FileOutputStream("Customer's Data");
                 ObjectOutput s = new ObjectOutputStream(f);
-                for(Customer hold : client)
+                for(Customer hold : client)                     //Loads all of objects into specified file
                 {
                 s.writeObject(hold);
                 s.flush();                    
