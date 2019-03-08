@@ -6,9 +6,9 @@
 package groupproject;
 
 import Model.Customer;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import Model.FileData;
+import java.io.IOException;
+import java.util.ArrayList;
 /**
  *
  * @author Eric Petersen
@@ -18,17 +18,31 @@ public class GroupProject {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persist");
-        EntityManager em = emf.createEntityManager();
+    public static void main(String[] args) throws IOException, ClassNotFoundException
+    {
+        ArrayList<Customer> client = new ArrayList<>();
+        FileData list = new FileData();
+        list.LoadData(client);    
         
-        Customer cust = em.find(Customer.class, 1);
-        System.out.println(cust.getName());
-        cust.setName("Bob");
-        System.out.println(cust.getName());
-        Customer cust2 = em.find(Customer.class, 2);
-        System.out.println(cust2.getEmail());
-        System.out.println(cust2.toString());
+        for(Customer hold : client)
+            System.out.println(hold.toString());
+
+        
+        client.add(new Customer("Paul","Fake@gmail.com","510-510-7799"));
+        client.add(new Customer("Greg","Test@gmail.com","408-550-1573"));
+        client.add(new Customer("Dalia","Faust@gmail.com","347-788-4378"));
+    
+        //for(Customer hold : client)
+          //  System.out.println(hold.toString());
+        
+        client.get(0).setName("Bill");
+        client.get(1).setMail("o.@hotmail.com");
+        client.get(2).setPhoneNumber("389-435-s35");
+
+        for(Customer hold : client)
+            System.out.println(hold.toString());
+
+        list.SaveData(client);
     }
     
 }
