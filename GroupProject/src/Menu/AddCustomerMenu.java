@@ -9,6 +9,15 @@ package Menu;
  *
  * @author Eric Petersen
  */
-public class AddCustomerMenu {
+public class AddCustomerMenu implements MenuInterface {
+
+    @Override
+    public void execute() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    @Override
+    public String toString() {
+        return "Add Customer";
+    }
 }
