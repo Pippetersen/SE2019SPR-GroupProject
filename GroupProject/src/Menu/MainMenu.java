@@ -30,7 +30,6 @@ public final class MainMenu implements MenuInterface {
         delCustMenu = new DeleteCustomerMenu();
         displayCustMenu = new DisplayCustomerListMenu();
         quitMenu = new QuitMenu();
-        int a = 0;
         //Always have at least the quit menu on the menu
         addToMainMenu(quitMenu);
         //Add the menu items for the first homework assignment
