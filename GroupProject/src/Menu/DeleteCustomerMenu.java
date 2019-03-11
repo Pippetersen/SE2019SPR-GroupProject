@@ -5,15 +5,21 @@
  */
 package Menu;
 
+import Model.CustomerDB;
+
 /**
  *
  * @author Eric Petersen
  */
 public class DeleteCustomerMenu implements MenuInterface {
-
+    private static CustomerDB dbPointer;
+    
+    public DeleteCustomerMenu(CustomerDB tempDB) {
+        dbPointer = tempDB;
+    }
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To be implemented
     }
     
     @Override

@@ -5,15 +5,30 @@
  */
 package Menu;
 
+import Model.CustomerDB;
+import Model.FileData;
+import java.io.IOException;
+
 /**
  *
  * @author Eric Petersen
  */
-public class QuitMenu implements MenuInterface  {
-
+public class QuitMenu implements MenuInterface   {
+    private static CustomerDB dbPointer;
+    
+    public QuitMenu(CustomerDB tempDB) {
+        dbPointer = tempDB;
+    }
+    
     @Override
     public void execute() {
-        //Need to implement saving DB off before closing
+        FileData tempData = new FileData();
+        try {
+            tempData.SaveData(dbPointer.getAll());
+        } catch(IOException ex) {
+            System.out.println("WARNING! Error Saving while exiting!");
+            System.out.println(ex.toString());
+        }
         System.exit(0);
     }
     

@@ -5,6 +5,7 @@
  */
 package Menu;
 
+import Model.CustomerDB;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,15 +22,17 @@ public final class MainMenu implements MenuInterface {
         DisplayCustomerListMenu displayCustMenu;
         QuitMenu quitMenu;
         List<MenuInterface> menuList;
-    //This is an example
         
-    //Constructor initializes each item
-    public MainMenu() {
+    private static CustomerDB dbPointer;
+        
+    //Constructor for Main Menu, passes in a Customer DB and sets each menu up with that DB
+    public MainMenu(CustomerDB tempDB) {
         menuList = new ArrayList<>();
-        addCustMenu = new AddCustomerMenu();
-        delCustMenu = new DeleteCustomerMenu();
-        displayCustMenu = new DisplayCustomerListMenu();
-        quitMenu = new QuitMenu();
+        dbPointer = tempDB;
+        addCustMenu = new AddCustomerMenu(dbPointer);
+        delCustMenu = new DeleteCustomerMenu(dbPointer);
+        displayCustMenu = new DisplayCustomerListMenu(dbPointer);
+        quitMenu = new QuitMenu(dbPointer);
         //Always have at least the quit menu on the menu
         addToMainMenu(quitMenu);
         //Add the menu items for the first homework assignment
@@ -74,5 +77,9 @@ public final class MainMenu implements MenuInterface {
     @Override
     public String toString() {
         return "Main Menu";
+    }
+    
+    public List<MenuInterface> getMenuList() {
+        return menuList;
     }
 }
