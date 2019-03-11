@@ -18,12 +18,19 @@ import java.util.ArrayList;
 public class Controller {
 
     /**
+     * This class holds the main method for the project and thus runs the menu which uses
+     *   the functionality of the model package
      * @param args the command line arguments
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
-
         
+        CustomerDB mainDataB = new CustomerDB();
+        MainMenu menu = new MainMenu(mainDataB);
+        
+        menu.execute();
     }
     
 }
