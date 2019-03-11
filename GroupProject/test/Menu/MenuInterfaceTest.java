@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author Eric Petersen
  */
-public class QuitMenuTest {
+public class MenuInterfaceTest {
     
-    public QuitMenuTest() {
+    public MenuInterfaceTest() {
     }
     
     @BeforeClass
@@ -38,29 +38,21 @@ public class QuitMenuTest {
     }
 
     /**
-     * Test of execute method, of class QuitMenu.
+     * Test of execute method, of class MenuInterface.
      */
     @Test
     public void testExecute() {
         System.out.println("execute");
-        QuitMenu instance = null;
+        MenuInterface instance = new MenuInterfaceImpl();
         instance.execute();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of toString method, of class QuitMenu.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        QuitMenu instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public class MenuInterfaceImpl implements MenuInterface {
+
+        public void execute() {
+        }
     }
     
 }

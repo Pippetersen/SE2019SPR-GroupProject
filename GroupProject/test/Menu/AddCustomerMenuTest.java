@@ -5,6 +5,7 @@
  */
 package Menu;
 
+import Model.CustomerDB;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
  * @author Eric Petersen
  */
 public class AddCustomerMenuTest {
+    private static CustomerDB testDB;
     
     public AddCustomerMenuTest() {
     }
@@ -31,6 +33,7 @@ public class AddCustomerMenuTest {
     
     @Before
     public void setUp() {
+        testDB = new CustomerDB();
     }
     
     @After
@@ -43,9 +46,9 @@ public class AddCustomerMenuTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        AddCustomerMenu instance = new AddCustomerMenu();
+        AddCustomerMenu instance = new AddCustomerMenu(testDB);
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
+        
         fail("The test case is a prototype.");
     }
 
@@ -55,11 +58,10 @@ public class AddCustomerMenuTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        AddCustomerMenu instance = new AddCustomerMenu();
-        String expResult = "";
+        AddCustomerMenu instance = null;
+        String expResult = "Add Customer";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
     
