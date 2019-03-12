@@ -69,9 +69,8 @@ public final class MainMenu implements MenuInterface {
         
         System.out.print("Enter a command number (0-0):");
         return STDIN.nextInt();
-        
     }
-    
+    //Execute menu, traps the program in the menu list
     @Override
     public void execute() {
         while(true) {
@@ -80,12 +79,12 @@ public final class MainMenu implements MenuInterface {
             menuList.get(getUserInput()).execute();
         }
     }
-    
+    //toString method
     @Override
     public String toString() {
         return "Main Menu";
     }
-    
+    //Getter for List
     public List<MenuInterface> getMenuList() {
         return menuList;
     }
