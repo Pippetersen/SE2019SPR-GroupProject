@@ -60,9 +60,15 @@ public final class MainMenu implements MenuInterface {
     //Get a selection choice from user input
     public int getUserInput() {
         Scanner STDIN = new Scanner(System.in);
-        System.out.print("Enter a command number (0-" + menuList.size() +
+        try {
+            System.out.print("Enter a command number (0-" + 
+                (menuList.size()-1) +
                 "):");
-        return STDIN.nextInt();
+            return STDIN.nextInt();
+        } finally {
+            System.out.println("Error while selectin a command");
+            return 0;
+        }
     }
     
     @Override
