@@ -26,10 +26,11 @@ public class Controller {
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
-        
+        //Load db file then intialize CustomerDB with file
         CustomerDB mainDataB = new CustomerDB();
         MainMenu menu = new MainMenu(mainDataB);
         
+        //start program loop
         menu.execute();
     }
     
