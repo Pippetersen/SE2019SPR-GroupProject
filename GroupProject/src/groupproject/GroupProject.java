@@ -48,10 +48,10 @@ public class GroupProject {
         for(Customer hold : people.getAll())
         {
             System.out.println(hold.toString());
-        }
-        
+        }      
         System.out.println(people.get(2).getNumber());
         System.out.println(people.get(2).getName());
+
         */
         list.SaveData(people.getAll());
         

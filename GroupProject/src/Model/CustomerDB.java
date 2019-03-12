@@ -29,6 +29,7 @@ public class CustomerDB {
     {
         return client.get(pos);
     }
+
     public ArrayList<Customer> getAll()
     {
         return client;

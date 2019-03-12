@@ -10,13 +10,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
 import java.util.Scanner;
+
 
 /**
  *
  * @author clone-sniper
  */
 public class FileData {
+
     
     public static String getFileName()
     {
@@ -30,6 +33,7 @@ public class FileData {
     public static void LoadData(ArrayList<Customer> client) throws IOException, ClassNotFoundException
     {
         if(new File(getFileName()).exists())   //Checks if a file exist and loads the data if it does
+
         {
             FileInputStream in = null;
             Customer holder = null;
@@ -64,13 +68,17 @@ public class FileData {
         System.out.println("No Existing Data");
     }
     //Saves Customer Data to a Byte File called Customer's Data
+
     public static void SaveData(ArrayList<Customer> client) throws IOException
+
     {
 
             FileOutputStream f = null;
             try 
             {
+
                 f = new FileOutputStream(getFileName());
+
                 ObjectOutput s = new ObjectOutputStream(f);
                 for(Customer hold : client)                     //Loads all of objects into specified file
                 {
