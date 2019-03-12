@@ -48,7 +48,7 @@ public class AddCustomerMenuTest {
         System.out.println("execute");
         AddCustomerMenu instance = new AddCustomerMenu(testDB);
         instance.execute();
-        
+        //assertEquals()
         fail("The test case is a prototype.");
     }
 
