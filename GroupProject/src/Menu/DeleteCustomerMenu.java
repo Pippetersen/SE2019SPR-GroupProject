@@ -20,7 +20,6 @@ public class DeleteCustomerMenu implements MenuInterface {
     @Override
     public void execute() {
         //To be implemented
-        System.out.println("This is not implemented yet");
     }
     
     @Override
