@@ -51,6 +51,7 @@ public class GroupProject {
         }
         
         System.out.println(people.get(2).getNumber());
+        System.out.println(people.get(2).getName());
         */
         list.SaveData(people.getAll());
         
