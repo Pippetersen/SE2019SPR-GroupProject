@@ -26,9 +26,14 @@ public class Controller {
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
-        //Load db file then intialize CustomerDB with file
+        //Initialize MainMenu and Model
         CustomerDB mainDataB = new CustomerDB();
         MainMenu menu = new MainMenu(mainDataB);
+        
+        //Load db file then add db file to DB
+        ArrayList<Customer> client = new ArrayList();
+        FileData.LoadData(client);
+        mainDataB.concatList(client);
         
         //start program loop
         menu.execute();

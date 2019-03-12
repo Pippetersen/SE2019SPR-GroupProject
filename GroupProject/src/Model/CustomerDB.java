@@ -30,6 +30,10 @@ public class CustomerDB {
         return client.get(pos);
     }
 
+    public void concatList(ArrayList<Customer> other){
+        client.addAll(other);
+    }
+    
     public ArrayList<Customer> getAll()
     {
         return client;
