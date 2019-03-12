@@ -49,6 +49,8 @@ public class GroupProject {
         {
             System.out.println(hold.toString());
         }
+        
+        System.out.println(people.get(2).getNumber());
         */
         list.SaveData(people.getAll());
         
