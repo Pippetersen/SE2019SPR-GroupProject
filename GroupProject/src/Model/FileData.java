@@ -20,16 +20,17 @@ import java.util.Scanner;
  */
 public class FileData {
 
-    
+    //Function to retrieve name of file to be used, returns "Customer's Data" if nothign entered
     public static String getFileName()
     {
-        Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);      
         System.out.println("Enter name for file");
         String name = in.nextLine();
+                   
         return name;
     }
 
-    //Loads Customer data from Byte File called Customer's Data
+    //Loads Customer data from Byte File 
     public static void LoadData(ArrayList<Customer> client) throws IOException, ClassNotFoundException
     {
         if(new File(getFileName()).exists())   //Checks if a file exist and loads the data if it does
@@ -67,7 +68,7 @@ public class FileData {
         else
         System.out.println("No Existing Data");
     }
-    //Saves Customer Data to a Byte File called Customer's Data
+    //Saves Customer Data to a Byte File
 
     public static void SaveData(ArrayList<Customer> client) throws IOException
 
@@ -86,9 +87,16 @@ public class FileData {
                 s.flush();                    
                 }
             } 
-            catch (FileNotFoundException ex) 
+            catch (FileNotFoundException ex)                  //If no name is entered, file is by deafult called "Customer File"
             {
-                System.out.println("File not Found");
+                f = new FileOutputStream("Customer File");   
+
+                ObjectOutput s = new ObjectOutputStream(f);
+                for(Customer hold : client)                     //Loads all of objects into specified file
+                {
+                s.writeObject(hold);
+                s.flush();
+                }
             } 
             finally
             {
