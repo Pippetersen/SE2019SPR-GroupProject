@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class FileData {
 
-    //Function to retrieve name of file to be used, returns "Customer's Data" if nothign entered
+    //Function to retrieve name of file to be used
     public static String getFileName()
     {
         Scanner in = new Scanner(System.in);      
