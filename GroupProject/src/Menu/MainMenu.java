@@ -60,6 +60,7 @@ public final class MainMenu implements MenuInterface {
     //Get a selection choice from user input
     public int getUserInput() {
         Scanner STDIN = new Scanner(System.in);
+
         if (menuList.size() > 1) {
             System.out.print("Enter a command number (0-" + 
                 (menuList.size()-1) +
@@ -69,6 +70,10 @@ public final class MainMenu implements MenuInterface {
         
         System.out.print("Enter a command number (0-0):");
         return STDIN.nextInt();
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     }
     //Execute menu, traps the program in the menu list
     @Override

@@ -20,9 +20,18 @@ public class CustomerDB {
         client.add(person);
     }
     
-    public Customer get(int position)
+    public void deleteCustomer(int pos)
     {
-        return client.get(position);
+        client.remove(client.get(pos));
+    }
+    
+    public Customer get(int pos)
+    {
+        return client.get(pos);
+    }
+
+    public void concatList(ArrayList<Customer> other){
+        client.addAll(other);
     }
     
     public ArrayList<Customer> getAll()
