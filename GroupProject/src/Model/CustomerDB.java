@@ -43,8 +43,8 @@ public class CustomerDB {
     {
         for(Customer hold : client)
         {
-            if(hold.getName().equals(name));
-                return hold;
+            if(hold.getName().equals(name))
+                return hold;            
         }
         return null;
     }
@@ -53,7 +53,7 @@ public class CustomerDB {
     {
         for(Customer hold : client)
         {
-            if(hold.getNumber().equals(number));
+            if(hold.getNumber().equals(number))
                 return hold;
         }
         return null;
@@ -63,7 +63,7 @@ public class CustomerDB {
     {
         for(Customer hold : client)
         {
-            if(hold.getMail().equals(email));
+            if(hold.getMail().equals(email))
                 return hold;
         }
         return null;
@@ -74,7 +74,7 @@ public class CustomerDB {
         ArrayList<Customer> temp = new ArrayList<>();
         for(Customer hold : client)
         {
-            if(hold.getName().equals(name));
+            if(hold.getName().equals(name))
                 temp.add(hold);
         }
         return temp;

@@ -48,7 +48,7 @@ public class Customer implements Serializable{
     {
         PhoneNumber = number;
     }
-   
+
     @Override
     public String toString() {
         return " | Customer Name: " + Name + " | Customer Phone Number: " + PhoneNumber + " | Customer Email: " + Email;
