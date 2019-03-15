@@ -31,10 +31,10 @@ public class Controller {
         MainMenu menu = new MainMenu(mainDataB);
         
         //Load db file then add db file to DB
-        ArrayList<Customer> client = new ArrayList();
+        ArrayList<Customer> client = new ArrayList<>();
+
         FileData.LoadData(client);
         mainDataB.concatList(client);
-        
         //start program loop
         menu.execute();
     }

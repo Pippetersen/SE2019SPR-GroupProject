@@ -1,4 +1,3 @@
-
 package Model;
 
 import java.io.File;
@@ -20,7 +19,7 @@ import java.util.Scanner;
  */
 public class FileData {
 
-    //Function to retrieve name of file to be used, returns "Customer's Data" if nothign entered
+    //Function to retrieve name of file to be used
     public static String getFileName()
     {
         Scanner in = new Scanner(System.in);      
@@ -32,15 +31,17 @@ public class FileData {
 
     //Loads Customer data from Byte File 
     public static void LoadData(ArrayList<Customer> client) throws IOException, ClassNotFoundException
-    {
-        if(new File(getFileName()).exists())   //Checks if a file exist and loads the data if it does
+    {   
+        String name = getFileName();
+        File temp = new File(name);
+        if(temp.exists())   //Checks if a file exist and loads the data if it does
 
         {
             FileInputStream in = null;
             Customer holder = null;
         try 
         {
-            in = new FileInputStream("Customer's Data");
+            in = new FileInputStream(name);
             ObjectInputStream s = new ObjectInputStream(in);
 
             while(in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
