@@ -70,11 +70,8 @@ public final class MainMenu implements MenuInterface {
         
         System.out.print("Enter a command number (0-0):");
         return STDIN.nextInt();
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     }
+    
     //Execute menu, traps the program in the menu list
     @Override
     public void execute() {
