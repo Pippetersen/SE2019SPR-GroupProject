@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import Model.CustomerDB;
+import Model.FileData;
 
 public class MainActivity extends AppCompatActivity implements  CustomerRecyclerView.ItemClickListener {
     private CustomerRecyclerView adapter;
@@ -15,7 +16,9 @@ public class MainActivity extends AppCompatActivity implements  CustomerRecycler
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FileData fdObj = new FileData();
         CustomerDB custDBObj = new CustomerDB();
+        //Load in the customer DB file into the obj
 
         RecyclerView recyclerView = findViewById(R.id.rvCustomers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
