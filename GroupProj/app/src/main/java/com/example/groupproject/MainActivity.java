@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements  CustomerRecycler
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //CHRIS- Make these two lines work
         FileData fdObj = new FileData();
         CustomerDB custDBObj = new CustomerDB();
         //Load in the customer DB file into the obj
