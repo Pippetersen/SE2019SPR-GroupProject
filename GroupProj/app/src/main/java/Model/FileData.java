@@ -33,31 +33,32 @@ public class FileData {
         return name;
     }
 */
-    //Loads Customer data from Byte File 
+    //Loads Customer data from Byte File , use getApplicationContext() as parameter for context
     public static void LoadData(ArrayList<Customer> client, Context context) throws IOException, ClassNotFoundException
     {
-        try
+        File file = context.getFileStreamPath("Customer's Data.txt");
+        if(file != null)
         {
-            FileInputStream in = context.openFileInput("Customer's Data.txt");
-            ObjectInputStream is = new ObjectInputStream(in);
-            Customer holder = null;
-
-            while (in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
-            {
-                holder = (Customer) is.readObject();
-                client.add(holder);
+            try {
+                FileInputStream in = context.openFileInput("Customer's Data.txt");
+                ObjectInputStream is = new ObjectInputStream(in);
+                Customer holder = null;
+                in.
+                while (in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
+                {
+                    holder = (Customer) is.readObject();
+                    client.add(holder);
+                }
+                is.close();
+                in.close();
+            } catch (FileNotFoundException e) {
+                Log.e("Exception", "File read failed: " + e.toString());
             }
-            is.close();
-            in.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            Log.e("Exception", "File read failed: " + e.toString());
         }
 
     }
-    //Saves Customer Data to a Byte File
 
+    //Saves Customer Data to a Byte File, , use getApplicationContext() as parameter for context
     public static void SaveData(ArrayList<Customer> client, Context context) throws IOException
     {
             try
