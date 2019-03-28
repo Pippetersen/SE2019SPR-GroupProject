@@ -43,7 +43,6 @@ public class FileData {
                 FileInputStream in = context.openFileInput("Customer's Data.txt");
                 ObjectInputStream is = new ObjectInputStream(in);
                 Customer holder = null;
-                in.
                 while (in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
                 {
                     holder = (Customer) is.readObject();
