@@ -1,5 +1,8 @@
 package Model;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -18,7 +22,7 @@ import java.util.Scanner;
  * @author clone-sniper
  */
 public class FileData {
-
+/*   currently not in use
     //Function to retrieve name of file to be used
     public static String getFileName()
     {
@@ -28,87 +32,48 @@ public class FileData {
                    
         return name;
     }
-
+*/
     //Loads Customer data from Byte File 
-    public static void LoadData(ArrayList<Customer> client) throws IOException, ClassNotFoundException
-    {   
-        String name = getFileName();
-        File temp = new File(name);
-        if(temp.exists())   //Checks if a file exist and loads the data if it does
-
+    public static void LoadData(ArrayList<Customer> client, Context context) throws IOException, ClassNotFoundException
+    {
+        try
         {
-            FileInputStream in = null;
+            FileInputStream in = context.openFileInput("Customer's Data.txt");
+            ObjectInputStream is = new ObjectInputStream(in);
             Customer holder = null;
-        try 
-        {
-            in = new FileInputStream(name);
-            ObjectInputStream s = new ObjectInputStream(in);
 
-            while(in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
+            while (in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
             {
-               holder = (Customer)s.readObject();
-               client.add(holder);
+                holder = (Customer) is.readObject();
+                client.add(holder);
             }
-            
-        } 
-        catch (FileNotFoundException ex) 
-        {
-            System.out.println("File for Customer Data not Found");
-        } 
-        finally 
-        {
-            try 
-            {
-                in.close();
-            } catch (IOException ex) 
-            {
-                System.out.println("File failed to close");
-            }
+            is.close();
+            in.close();
         }
+        catch (FileNotFoundException e)
+        {
+            Log.e("Exception", "File read failed: " + e.toString());
         }
-        else
-        System.out.println("No Existing Data");
+
     }
     //Saves Customer Data to a Byte File
 
-    public static void SaveData(ArrayList<Customer> client) throws IOException
-
+    public static void SaveData(ArrayList<Customer> client, Context context) throws IOException
     {
-
-            FileOutputStream f = null;
-            try 
+            try
             {
 
-                f = new FileOutputStream(getFileName());
-
-                ObjectOutput s = new ObjectOutputStream(f);
+                ObjectOutputStream s = new ObjectOutputStream(context.openFileOutput("Customer's Data.txt", Context.MODE_PRIVATE));
                 for(Customer hold : client)                     //Loads all of objects into specified file
                 {
                 s.writeObject(hold);
                 s.flush();                    
                 }
-            } 
-            catch (FileNotFoundException ex)                  //If no name is entered, file is by deafult called "Customer File"
+                s.close();
+            }
+            catch (FileNotFoundException e)                  //If no name is entered, file is by deafult called "Customer File"
             {
-                f = new FileOutputStream("Customer File");   
-
-                ObjectOutput s = new ObjectOutputStream(f);
-                for(Customer hold : client)                     //Loads all of objects into specified file
-                {
-                s.writeObject(hold);
-                s.flush();
-                }
-            } 
-            finally
-            {
-                try 
-                {
-                    f.close();
-                } 
-                catch (IOException ex)
-                {
-                    System.out.println("File failed to close");
-                }
+                Log.e("Exception", "File write failed: " + e.toString());
             }
     }    
 }
