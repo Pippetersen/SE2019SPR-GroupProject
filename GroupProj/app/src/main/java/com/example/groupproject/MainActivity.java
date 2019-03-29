@@ -1,7 +1,12 @@
 package com.example.groupproject;
 
+
 import android.Manifest;
 import android.os.Build;
+
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,18 +22,20 @@ import Model.Customer;
 import Model.CustomerDB;
 import Model.FileData;
 
-import static Model.FileData.*;
+import static Model.FileData.LoadData;
 
-public class MainActivity extends AppCompatActivity implements  CustomerRecyclerView.ItemClickListener {
-    CustomerRecyclerView adapter;
-    CustomerDB custDBObj = new CustomerDB();
+public class MainActivity extends AppCompatActivity implements CustomerRecyclerView.ItemClickListener {
+    private CustomerRecyclerView adapter;
+    private int mLastClickedPos;
+    private static final int REQUEST_EDIT_CODE = 0;
 
     //Create and run the recyclerview
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //CHRIS- Make these two lines work
+        CustomerDB custDBObj = new CustomerDB();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
@@ -38,15 +45,13 @@ public class MainActivity extends AppCompatActivity implements  CustomerRecycler
         custDBObj.addCustomer(new Customer("Mike","email@gmail.com","512-123-4232"));
 
 
-
-        for(Customer hold : custDBObj.getAll())                     //Loads all of objects into specified file
+        //Loads all of objects into specified file
+        for(Customer hold : custDBObj.getAll())
         {
 
             Toast.makeText(this,hold.getName(), Toast.LENGTH_SHORT).show();
 
         }
-
-      // Toast.makeText(this,custDBObj.get(0).getName(), Toast.LENGTH_SHORT).show();
         //Load in the customer DB file into the obj
 
         try {
@@ -72,6 +77,25 @@ public class MainActivity extends AppCompatActivity implements  CustomerRecycler
     @Override
     public void onItemClick(View view, int position) {
         //This is story 2
-        //Toast.makeText("This is the test toast", Toast.LENGTH_SHORT).show();
+        mLastClickedPos = position;
+        Intent intent = new Intent(this, CustEdit.class);
+        intent.putExtra("aCust", adapter.getMData().get(position));
+        startActivityForResult(intent, REQUEST_EDIT_CODE);
+    }
+    //This is the data disassembler for receiving edited customers
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if(requestCode == REQUEST_EDIT_CODE) {
+            if(data != null) {
+                Customer tempCust = (Customer) data.getSerializableExtra("editCust");
+                adapter.getMData().get(mLastClickedPos).setName(tempCust.getName());
+                adapter.getMData().get(mLastClickedPos).setPhoneNumber(tempCust.getNumber());
+                adapter.getMData().get(mLastClickedPos).setMail(tempCust.getMail());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 }
