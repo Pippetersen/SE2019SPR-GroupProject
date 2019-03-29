@@ -45,8 +45,9 @@ public class FileData {
                 FileInputStream in =  new FileInputStream(root);
                 ObjectInputStream is = new ObjectInputStream(in);
                 Customer holder = null;
-                while (in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
+                while (in.available() > 0)
                 {
+                    //Loads each object individually  into CustomerDB
                     holder = (Customer) is.readObject();
                     custDBObj.addCustomer(holder);
                 }
@@ -68,15 +69,16 @@ public class FileData {
        File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Customer's Data.txt");
             try
             {
+                //Loads all of objects into specified file
                 ObjectOutputStream s = new ObjectOutputStream(new FileOutputStream(root));
-                for(Customer hold : custDBObj.getAll())                     //Loads all of objects into specified file
+                for(Customer hold : custDBObj.getAll())
                 {
                 s.writeObject(hold);
                 s.flush();                    
                 }
                 s.close();
             }
-            catch (FileNotFoundException e)                  //If no name is entered, file is by deafult called "Customer File"
+            catch (FileNotFoundException e)
             {
                 Toast.makeText(context,"File  doesn't exist", Toast.LENGTH_SHORT).show();
             }
