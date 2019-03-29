@@ -5,10 +5,9 @@
  */
 package Menu;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import Model.Customer;
+import Model.CustomerDB;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,50 +16,29 @@ import static org.junit.Assert.*;
  * @author Eric Petersen
  */
 public class DeleteCustomerMenuTest {
-    
-    public DeleteCustomerMenuTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private CustomerDB custDB;
     
     @Before
     public void setUp() {
+        custDB = new CustomerDB();
+        custDB.addCustomer(new Customer("Bill", "email@email.com","123-456-7890"));
     }
     
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of execute method, of class DeleteCustomerMenu.
-     */
     @Test
     public void testExecute() {
         System.out.println("execute");
-        DeleteCustomerMenu instance = null;
+        DeleteCustomerMenu instance = new DeleteCustomerMenu(custDB);
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(custDB.getAll().size() == 0);
     }
 
-    /**
-     * Test of toString method, of class DeleteCustomerMenu.
-     */
     @Test
     public void testToString() {
         System.out.println("toString");
-        DeleteCustomerMenu instance = null;
-        String expResult = "";
+        DeleteCustomerMenu instance = new DeleteCustomerMenu(custDB);
+        String expResult = "Delete Customer";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
