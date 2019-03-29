@@ -18,6 +18,7 @@ public class CustomerRecyclerView extends RecyclerView.Adapter<CustomerRecyclerV
         private LayoutInflater mInflater;
         private ItemClickListener mClickListener;
 
+
         // data is passed into the constructor
         CustomerRecyclerView(Context context, CustomerDB data) {
             this.mInflater = LayoutInflater.from(context);
@@ -34,9 +35,9 @@ public class CustomerRecyclerView extends RecyclerView.Adapter<CustomerRecyclerV
         // binds the data to the TextView in each row
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            List<Customer> tempList = mData.getAll();
-            String remCatDesc = tempList.get(position).toString();
-            holder.myTextView.setText(remCatDesc);
+            Customer customer = mData.getAll().get(position);
+            String tempList = customer.toString();
+            holder.myTextView.setText(tempList);
         }
 
         // total number of rows
