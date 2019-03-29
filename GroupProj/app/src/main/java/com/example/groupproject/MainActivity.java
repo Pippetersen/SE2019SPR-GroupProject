@@ -1,5 +1,7 @@
 package com.example.groupproject;
 
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import static Model.FileData.LoadData;
 public class MainActivity extends AppCompatActivity implements CustomerRecyclerView.ItemClickListener {
     private CustomerRecyclerView adapter;
     private int mLastClickedPos;
+    private static final int REQUEST_EDIT_CODE = 0;
     //Create and run the recyclerview
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements CustomerRecyclerV
         mLastClickedPos = position;
         Intent intent = new Intent(this, CustEdit.class);
         intent.putExtra("aCust", adapter.getMData().get(position));
-        startActivityForResult(intent, RESULT_OK);
+        startActivityForResult(intent, REQUEST_EDIT_CODE);
     }
     //This is the data disassembler for receiving edited customers
     @Override
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements CustomerRecyclerV
             return;
         }
 
-        if(requestCode == Activity.RESULT_OK) {
+        if(requestCode == REQUEST_EDIT_CODE) {
             if(data != null) {
                 Customer tempCust = (Customer) data.getSerializableExtra("editCust");
                 adapter.getMData().get(mLastClickedPos).setName(tempCust.getName());

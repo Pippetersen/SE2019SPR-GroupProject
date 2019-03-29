@@ -38,13 +38,18 @@ public class CustEdit extends AppCompatActivity {
                 aCustomer.setName(mtvName.getText().toString());
                 aCustomer.setPhoneNumber(mtvNum.getText().toString());
                 aCustomer.setMail(mtvEmail.getText().toString());
-                //Make the intent
-                Intent intent = new Intent();
-                intent.putExtra("editCust", aCustomer);
-                //Send off the result and close activity
-                setResult(RESULT_OK, intent);
+                setSaveResult(aCustomer);
                 finish();
             }
         });
     }
+
+    private void setSaveResult(Customer tCust) {
+        //Make the intent
+        Intent intent = new Intent();
+        intent.putExtra("editCust", aCustomer);
+        //Send off the result and close activity
+        setResult(RESULT_OK, intent);
+    }
+
 }
