@@ -5,10 +5,9 @@
  */
 package Menu;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import Model.Customer;
+import Model.CustomerDB;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,50 +16,33 @@ import static org.junit.Assert.*;
  * @author Eric Petersen
  */
 public class QuitMenuTest {
-    
-    public QuitMenuTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    MainMenu menu;
+    CustomerDB custDB;
     
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        custDB = new CustomerDB();
+        custDB.addCustomer(new Customer("Bill", "email@email.com","123-456-7890"));
+        menu = new MainMenu(custDB);
     }
 
-    /**
-     * Test of execute method, of class QuitMenu.
-     */
     @Test
     public void testExecute() {
         System.out.println("execute");
-        QuitMenu instance = null;
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        QuitMenu instance = new QuitMenu(custDB);
+        while(menu.getMenuList().size() > 1) {
+            menu.removeFromMainMenu(1);
+        }
+        menu.execute();
     }
-
-    /**
-     * Test of toString method, of class QuitMenu.
-     */
+    
     @Test
     public void testToString() {
         System.out.println("toString");
-        QuitMenu instance = null;
-        String expResult = "";
+        QuitMenu instance = new QuitMenu(custDB);
+        String expResult = "Quit";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

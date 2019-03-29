@@ -6,10 +6,9 @@
 package Menu;
 
 import Model.CustomerDB;
+import Model.Customer;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,22 +17,12 @@ import static org.junit.Assert.*;
  * @author Eric Petersen
  */
 public class AddCustomerMenuTest {
-    private static CustomerDB testDB;
-    
-    public AddCustomerMenuTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private CustomerDB custDB;
     
     @Before
     public void setUp() {
-        testDB = new CustomerDB();
+        custDB = new CustomerDB();
+        custDB.addCustomer(new Customer("Bill", "email@email.com","123-456-7890"));
     }
     
     @After
@@ -46,10 +35,10 @@ public class AddCustomerMenuTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        AddCustomerMenu instance = new AddCustomerMenu(testDB);
+        AddCustomerMenu instance = new AddCustomerMenu(custDB);
         instance.execute();
         
-        fail("The test case is a prototype.");
+        assertTrue(custDB.getAll().size() > 1);
     }
 
     /**
@@ -58,11 +47,10 @@ public class AddCustomerMenuTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        AddCustomerMenu instance = null;
+        AddCustomerMenu instance = new AddCustomerMenu(custDB);
         String expResult = "Add Customer";
         String result = instance.toString();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
     
 }
