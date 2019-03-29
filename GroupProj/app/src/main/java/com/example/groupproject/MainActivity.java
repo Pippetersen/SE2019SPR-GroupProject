@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements CustomerRecyclerV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //CHRIS- Make these two lines work
+        CustomerDB custDBObj = new CustomerDB();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
@@ -44,15 +45,13 @@ public class MainActivity extends AppCompatActivity implements CustomerRecyclerV
         custDBObj.addCustomer(new Customer("Mike","email@gmail.com","512-123-4232"));
 
 
-
-        for(Customer hold : custDBObj.getAll())                     //Loads all of objects into specified file
+        //Loads all of objects into specified file
+        for(Customer hold : custDBObj.getAll())
         {
 
             Toast.makeText(this,hold.getName(), Toast.LENGTH_SHORT).show();
 
         }
-
-      // Toast.makeText(this,custDBObj.get(0).getName(), Toast.LENGTH_SHORT).show();
         //Load in the customer DB file into the obj
 
         try {
@@ -89,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements CustomerRecyclerV
         if(resultCode != Activity.RESULT_OK) {
             return;
         }
-
         if(requestCode == REQUEST_EDIT_CODE) {
             if(data != null) {
                 Customer tempCust = (Customer) data.getSerializableExtra("editCust");
