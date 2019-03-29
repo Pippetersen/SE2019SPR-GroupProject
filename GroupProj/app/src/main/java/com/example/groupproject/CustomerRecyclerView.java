@@ -35,6 +35,7 @@ public class CustomerRecyclerView extends RecyclerView.Adapter<CustomerRecyclerV
         // binds the data to the TextView in each row
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+          
             Customer customer = mData.getAll().get(position);
             String tempList = customer.toString();
             holder.myTextView.setText(tempList);
@@ -72,5 +73,10 @@ public class CustomerRecyclerView extends RecyclerView.Adapter<CustomerRecyclerV
         // parent activity will implement this method to respond to click events
         public interface ItemClickListener {
             void onItemClick(View view, int position);
+        }
+
+        //quick method to get mdata
+        public CustomerDB getMData() {
+            return mData;
         }
 }
