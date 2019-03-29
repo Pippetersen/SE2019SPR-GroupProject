@@ -35,7 +35,7 @@ public class CustomerRecyclerView extends RecyclerView.Adapter<CustomerRecyclerV
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             List<Customer> tempList = mData.getAll();
-            String remCatDesc = tempList.get(position).toString();
+            String remCatDesc = tempList.get(position).getName();
             holder.myTextView.setText(remCatDesc);
         }
 
@@ -71,5 +71,10 @@ public class CustomerRecyclerView extends RecyclerView.Adapter<CustomerRecyclerV
         // parent activity will implement this method to respond to click events
         public interface ItemClickListener {
             void onItemClick(View view, int position);
+        }
+
+        //quick method to get mdata
+        public CustomerDB getMData() {
+            return mData;
         }
 }
