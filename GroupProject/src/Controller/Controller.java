@@ -32,7 +32,7 @@ public class Controller {
         
         //Load db file then add db file to DB
         ArrayList<Customer> client = new ArrayList<>();
-
+        //LoadData now requires an extra arrayList<Tracker> in its parameter to keep track of each files access/edit and returns a int pointing to its location in the list
         FileData.LoadData(client);
         mainDataB.concatList(client);
         //start program loop
