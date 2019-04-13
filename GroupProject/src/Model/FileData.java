@@ -30,12 +30,11 @@ public class FileData {
     }
 
     //Loads Customer data from Byte File 
-    public static void LoadData(ArrayList<Customer> client) throws IOException, ClassNotFoundException
+    public static int LoadData(ArrayList<Customer> client,ArrayList<Tracker> track) throws IOException, ClassNotFoundException
     {   
         String name = getFileName();
         File temp = new File(name);
         if(temp.exists())   //Checks if a file exist and loads the data if it does
-
         {
             FileInputStream in = null;
             Customer holder = null;
@@ -48,8 +47,7 @@ public class FileData {
             {
                holder = (Customer)s.readObject();
                client.add(holder);
-            }
-            
+            }    
         } 
         catch (FileNotFoundException ex) 
         {
@@ -68,19 +66,60 @@ public class FileData {
         }
         else
         System.out.println("No Existing Data");
+       
+        temp = new File("Access_Tracker"); //Checks if a file the contains the access data exist
+        if(temp.exists())   
+        {
+            FileInputStream in = null;
+            Tracker holder = null;
+        try 
+        {
+            in = new FileInputStream("Access_Tracker");
+            ObjectInputStream s = new ObjectInputStream(in);
+
+            while(in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
+            {
+               holder = (Tracker)s.readObject();
+               track.add(holder);
+            } 
+        } 
+        catch (FileNotFoundException ex) 
+        {
+            System.out.println("File for Tracking Customer Data not Found");
+        } 
+        finally 
+        {
+            try 
+            {
+                in.close();
+            } catch (IOException ex) 
+            {
+                System.out.println("File failed to close");
+            }
+        }
+        }
+        else
+        System.out.println("No Existing Tracking Data");
+        
+        if(track.contains(name))
+            return track.indexOf(name);
+        else 
+        {
+            Tracker hold = new Tracker(name);
+            track.add(hold);
+            return 0;
+        }
+            
     }
     //Saves Customer Data to a Byte File
 
-    public static void SaveData(ArrayList<Customer> client) throws IOException
-
+    public static void SaveData(ArrayList<Customer> client, ArrayList<Tracker> track) throws IOException
     {
-
             FileOutputStream f = null;
+            FileOutputStream t = null;
             try 
             {
-
                 f = new FileOutputStream(getFileName());
-
                 ObjectOutput s = new ObjectOutputStream(f);
                 for(Customer hold : client)                     //Loads all of objects into specified file
                 {
@@ -91,7 +130,6 @@ public class FileData {
             catch (FileNotFoundException ex)                  //If no name is entered, file is by deafult called "Customer File"
             {
                 f = new FileOutputStream("Customer File");   
-
                 ObjectOutput s = new ObjectOutputStream(f);
                 for(Customer hold : client)                     //Loads all of objects into specified file
                 {
@@ -99,16 +137,21 @@ public class FileData {
                 s.flush();
                 }
             } 
-            finally
+            try
             {
-                try 
+                t = new FileOutputStream("Access_Tracker");
+                ObjectOutput o = new ObjectOutputStream(t);
+                for(Tracker hold : track)                     //Loads all of objects into specified file
                 {
-                    f.close();
-                } 
-                catch (IOException ex)
-                {
-                    System.out.println("File failed to close");
-                }
+                o.writeObject(hold);
+                o.flush();                    
+                }                
             }
+            catch (FileNotFoundException ex)    
+            {
+                System.out.println("Saving Tracker Failed");
+            }
+            f.close();
+            t.close();
     }    
 }

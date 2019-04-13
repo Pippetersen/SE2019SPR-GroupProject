@@ -24,6 +24,7 @@ public class QuitMenu implements MenuInterface   {
     public void execute() {
         FileData tempData = new FileData();
         try {
+            //SavaData requires an arrayList<Tracker> parameter to save trackign data 
             tempData.SaveData(dbPointer.getAll());
         } catch(IOException ex) {
             System.out.println("WARNING! Error Saving while exiting!");
