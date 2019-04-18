@@ -6,6 +6,7 @@
 package Menu;
 
 import Model.CustomerDB;
+import Model.Tracker;
 import java.util.Scanner;
 
 /**
@@ -14,9 +15,11 @@ import java.util.Scanner;
  */
 public class DeleteCustomerMenu implements MenuInterface {
     private static CustomerDB dbPointer;
+    private final Tracker tracker;
     
-    public DeleteCustomerMenu(CustomerDB tempDB) {
+    public DeleteCustomerMenu(CustomerDB tempDB, Tracker tempTrack) {
         dbPointer = tempDB;
+        tracker = tempTrack;
     }
     //Prompts user for how they would like to delete
     @Override
@@ -64,6 +67,7 @@ public class DeleteCustomerMenu implements MenuInterface {
             return;
         }
         System.out.println("Name found " + occur + " time(s), each deleted.");
+        tracker.FileEdit();
     }
     
     private void deleteByNum() {
@@ -84,6 +88,7 @@ public class DeleteCustomerMenu implements MenuInterface {
             return;
         }
         System.out.println("Phone number found " + occur + " time(s), each deleted.");
+        tracker.FileEdit();
     }
     
     private void deleteByEmail(){
@@ -104,6 +109,7 @@ public class DeleteCustomerMenu implements MenuInterface {
             return;
         }
         System.out.println("Email found " + occur + " time(s), each deleted.");
+        tracker.FileEdit();
     }
     
     @Override

@@ -7,6 +7,8 @@ package Menu;
 
 import Model.CustomerDB;
 import Model.Customer;
+import Model.Tracker;
+
 import java.util.Scanner;
 
 /**
@@ -16,9 +18,11 @@ import java.util.Scanner;
 public class AddCustomerMenu implements MenuInterface {
     //Needs customer DB to add customers.
     private static CustomerDB dbPointer;
+    private final Tracker tracker;
     
-    public AddCustomerMenu(CustomerDB tempDB) {
+    public AddCustomerMenu(CustomerDB tempDB, Tracker tempTracker) {
         dbPointer = tempDB;
+        tracker = tempTracker;
     }
     
     @Override
@@ -32,6 +36,7 @@ public class AddCustomerMenu implements MenuInterface {
         System.out.print("Please enter customer phone number:");
         String tempNum = STDIN.nextLine();
         dbPointer.addCustomer(new Customer(tempName, tempEmail, tempNum));
+        tracker.FileEdit();
     }
     
     @Override
