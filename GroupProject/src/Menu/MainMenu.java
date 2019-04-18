@@ -6,6 +6,7 @@
 package Menu;
 
 import Model.CustomerDB;
+import Model.Tracker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,25 +21,30 @@ public final class MainMenu implements MenuInterface {
         AddCustomerMenu addCustMenu;
         DeleteCustomerMenu delCustMenu;
         DisplayCustomerListMenu displayCustMenu;
+        DisplayProgramStats displayProgMenu;
         QuitMenu quitMenu;
         List<MenuInterface> menuList;
         
     private static CustomerDB dbPointer;
+    private ArrayList<Tracker> trackerList;
         
     //Constructor for Main Menu, passes in a Customer DB and sets each menu up with that DB
-    public MainMenu(CustomerDB tempDB) {
+    public MainMenu(CustomerDB tempDB, ArrayList<Tracker> tempTracker) {
         menuList = new ArrayList<>();
         dbPointer = tempDB;
+        trackerList = tempTracker;
         addCustMenu = new AddCustomerMenu(dbPointer);
         delCustMenu = new DeleteCustomerMenu(dbPointer);
         displayCustMenu = new DisplayCustomerListMenu(dbPointer);
-        quitMenu = new QuitMenu(dbPointer);
+        displayProgMenu = new DisplayProgramStats(tempTracker);
+        quitMenu = new QuitMenu(dbPointer, trackerList);
         //Always have at least the quit menu on the menu
         addToMainMenu(quitMenu);
         //Add the menu items for the first homework assignment
         addToMainMenu(addCustMenu);
         addToMainMenu(delCustMenu);
         addToMainMenu(displayCustMenu);
+        addToMainMenu(displayProgMenu);
     }
     
     //Add a menu item to the list

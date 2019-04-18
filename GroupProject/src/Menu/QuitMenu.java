@@ -7,7 +7,9 @@ package Menu;
 
 import Model.CustomerDB;
 import Model.FileData;
+import Model.Tracker;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,9 +17,11 @@ import java.io.IOException;
  */
 public class QuitMenu implements MenuInterface   {
     private static CustomerDB dbPointer;
+    private ArrayList<Tracker> trackerList;
     
-    public QuitMenu(CustomerDB tempDB) {
+    public QuitMenu(CustomerDB tempDB, ArrayList<Tracker> tempTracker) {
         dbPointer = tempDB;
+        trackerList = tempTracker;
     }
     
     @Override
@@ -25,7 +29,7 @@ public class QuitMenu implements MenuInterface   {
         FileData tempData = new FileData();
         try {
             //SavaData requires an arrayList<Tracker> parameter to save trackign data 
-            tempData.SaveData(dbPointer.getAll());
+            tempData.SaveData(dbPointer.getAll(), trackerList);
         } catch(IOException ex) {
             System.out.println("WARNING! Error Saving while exiting!");
             System.out.println(ex.toString());
