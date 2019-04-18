@@ -6,6 +6,7 @@
 package Menu;
 
 import Model.CustomerDB;
+import Model.Tracker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,25 +21,46 @@ public final class MainMenu implements MenuInterface {
         AddCustomerMenu addCustMenu;
         DeleteCustomerMenu delCustMenu;
         DisplayCustomerListMenu displayCustMenu;
+        DisplayProgramStats displayProgMenu;
         QuitMenu quitMenu;
         List<MenuInterface> menuList;
+        String currentUser;
+        Tracker trackCurrentUser;
+        ArrayList<Tracker> trackerList;
         
     private static CustomerDB dbPointer;
         
     //Constructor for Main Menu, passes in a Customer DB and sets each menu up with that DB
-    public MainMenu(CustomerDB tempDB) {
+    public MainMenu(CustomerDB tempDB, ArrayList<Tracker> tempTracker) {
         menuList = new ArrayList<>();
         dbPointer = tempDB;
-        addCustMenu = new AddCustomerMenu(dbPointer);
-        delCustMenu = new DeleteCustomerMenu(dbPointer);
+        
+        if(tempTracker.size() > 0) {
+            trackerList = tempTracker;
+        } else {
+            trackerList = new ArrayList<>();
+        }
+        getCurrentUser();
+        int tempi = checkCurrentUser();
+        if(tempi != -1) {
+            trackCurrentUser = trackerList.get(tempi);
+        } else {
+            trackCurrentUser = new Tracker(currentUser);
+            trackerList.add(trackCurrentUser);
+        }
+        
+        addCustMenu = new AddCustomerMenu(dbPointer, trackCurrentUser);
+        delCustMenu = new DeleteCustomerMenu(dbPointer, trackCurrentUser);
         displayCustMenu = new DisplayCustomerListMenu(dbPointer);
-        quitMenu = new QuitMenu(dbPointer);
+        displayProgMenu = new DisplayProgramStats(tempTracker);
+        quitMenu = new QuitMenu(dbPointer, trackerList);
         //Always have at least the quit menu on the menu
         addToMainMenu(quitMenu);
         //Add the menu items for the first homework assignment
         addToMainMenu(addCustMenu);
         addToMainMenu(delCustMenu);
         addToMainMenu(displayCustMenu);
+        addToMainMenu(displayProgMenu);
     }
     
     //Add a menu item to the list
@@ -89,5 +111,27 @@ public final class MainMenu implements MenuInterface {
     //Getter for List
     public List<MenuInterface> getMenuList() {
         return menuList;
+    }
+    
+    //Get current user
+    private void getCurrentUser() {
+        System.out.println("Please input user name:");
+        Scanner STDIN = new Scanner(System.in);
+        currentUser = STDIN.nextLine();
+    }
+    
+    //Check if current user already exists in usage list
+    private int checkCurrentUser() {
+        if (trackerList.isEmpty()) {
+            return -1;
+        }
+        
+        for(int i = 0; i < trackerList.size(); i++) {
+                if(trackerList.get(i).getName().equals(currentUser)) {
+                    return i;
+                }
+        }
+        
+        return -1;
     }
 }

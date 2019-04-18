@@ -13,35 +13,40 @@ public class Tracker {
     private String name;
     private int accessed, edit;
     
-    Tracker(String _name,int acc, int edt)
+    public Tracker(String _name,int acc, int edt)
     {
         name = _name;
         accessed = acc;
         edit = edt;
     }
-    Tracker(String _name)
+    public Tracker(String _name)
     {
         name = _name;
         accessed = 0;
         edit = 0;
     }
     
-    int getAccess()
+    public int getAccess()
     {
         return accessed;
     }
     
-    int getEdit()
+    public int getEdit()
     {
         return edit;
     }
     
-    void FileAccessed()
+    public String getName()
+    {
+        return name;
+    }
+    
+    public void FileAccessed()
     {
         accessed++;
     }
     
-    void FileEdit()
+    public void FileEdit()
     {
         edit++;
     }
