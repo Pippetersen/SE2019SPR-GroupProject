@@ -5,11 +5,13 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author clone-sniper
  */
-public class Tracker {
+public class Tracker implements Serializable{
     private String name;
     private int accessed, edit;
     
