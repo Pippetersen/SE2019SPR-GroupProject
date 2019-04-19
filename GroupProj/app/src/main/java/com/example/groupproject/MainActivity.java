@@ -2,63 +2,51 @@ package com.example.groupproject;
 
 
 import android.Manifest;
-import android.os.Build;
-
-
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.IOException;
-import java.security.Permission;
-import java.util.ArrayList;
 
 import Model.Customer;
 import Model.CustomerDB;
 import Model.FileData;
 
-import static Model.FileData.LoadData;
-
 public class MainActivity extends AppCompatActivity implements CustomerRecyclerView.ItemClickListener {
     private CustomerRecyclerView adapter;
     private int mLastClickedPos;
     private static final int REQUEST_EDIT_CODE = 0;
+    private CustomerDB custDBObj;
 
     //Create and run the recyclerview
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CustomerDB custDBObj = new CustomerDB();
+        custDBObj = new CustomerDB();
         //Ask for permission to edit data in device
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
             requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
         }
-        //Testing to add customer to DB
-        custDBObj.addCustomer(new Customer("Bill","email@gmail.com","512-123-4232"));
-        custDBObj.addCustomer(new Customer("Mike","email@gmail.com","512-123-4232"));
-
-
         //Load in the customer DB file into the obj
-
         try {
             FileData.LoadData(custDBObj,this);
         } catch (IOException e) {
             e.printStackTrace();
+            //Testing to add customer to DB
+            custDBObj.addCustomer(new Customer("Bill","email@gmail.com","512-123-4232"));
+            custDBObj.addCustomer(new Customer("Mike","email@gmail.com","512-123-4232"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        //Save to a file
-        try {
-            FileData.SaveData(custDBObj,this);
-        } catch (IOException e) {
-            e.printStackTrace();
+            //Testing to add customer to DB
+            custDBObj.addCustomer(new Customer("Bill", "email@gmail.com", "512-123-4232"));
+            custDBObj.addCustomer(new Customer("Mike", "email@gmail.com", "512-123-4232"));
         }
 
         RecyclerView recyclerView = findViewById(R.id.rvCustomers);
@@ -90,6 +78,17 @@ public class MainActivity extends AppCompatActivity implements CustomerRecyclerV
                 adapter.getMData().get(mLastClickedPos).setMail(tempCust.getMail());
                 adapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Save to a file
+        try {
+            FileData.SaveData(custDBObj,this);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

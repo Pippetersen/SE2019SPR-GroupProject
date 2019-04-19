@@ -71,7 +71,7 @@ public class FileData {
         if(temp.exists())   
         {
             FileInputStream in = null;
-            Tracker tracker = null;
+            Tracker holder = null;
         try 
         {
             in = new FileInputStream("Access_Tracker");
@@ -79,8 +79,8 @@ public class FileData {
 
             while(in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
             {
-               tracker = (Tracker) s.readObject();
-               track.add(tracker);
+               holder = (Tracker)s.readObject();
+               track.add(holder);
             } 
         } 
         catch (FileNotFoundException ex) 
