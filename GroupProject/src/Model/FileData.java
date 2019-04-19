@@ -64,9 +64,9 @@ public class FileData {
             }
         }
         }
-        else
-        System.out.println("No Existing Data");
-       
+        else {
+            System.out.println("No Existing Data");
+        }
         temp = new File("Access_Tracker"); //Checks if a file the contains the access data exist
         if(temp.exists())   
         {
