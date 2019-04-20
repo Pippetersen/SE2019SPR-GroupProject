@@ -5,11 +5,13 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author clone-sniper
  */
-public class Tracker {
+public class Tracker implements Serializable {
     private String name;
     private int accessed, edit;
     
@@ -54,6 +56,6 @@ public class Tracker {
     @Override
     public String toString() 
     {
-        return name + "\nAccessed: " + accessed + "+nEdited: " + edit;
+        return name + "\nAccessed: " + accessed + "+\nEdited: " + edit;
     }
 }

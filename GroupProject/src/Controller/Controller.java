@@ -5,10 +5,8 @@
  */
 package Controller;
 
-import Model.Customer;
-import Model.CustomerDB;
-import Model.FileData;
 import Menu.MainMenu;
+import Model.*;
 import java.io.IOException;
 import java.util.ArrayList;
 /**
@@ -26,15 +24,19 @@ public class Controller {
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
-        //Initialize MainMenu and Model
+        //Initialize Model
         CustomerDB mainDataB = new CustomerDB();
-        MainMenu menu = new MainMenu(mainDataB);
         
         //Load db file then add db file to DB
         ArrayList<Customer> client = new ArrayList<>();
-        //LoadData now requires an extra arrayList<Tracker> in its parameter to keep track of each files access/edit and returns a int pointing to its location in the list
-        FileData.LoadData(client);
+        ArrayList<Tracker> userList = new ArrayList<>();
+        //LoadData now requires an extra arrayList<Tracker> in its parameter to 
+        //keep track of each files access/edit and returns a int pointing to 
+        //its location in the list
+        FileData.LoadData(client, userList);
         mainDataB.concatList(client);
+        
+        MainMenu menu = new MainMenu(mainDataB, userList);
         //start program loop
         menu.execute();
     }
