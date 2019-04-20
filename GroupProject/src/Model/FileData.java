@@ -67,20 +67,22 @@ public class FileData {
         else {
             System.out.println("No Existing Data");
         }
+        
+        
         temp = new File("Access_Tracker"); //Checks if a file the contains the access data exist
         if(temp.exists())   
         {
-            FileInputStream in = null;
-            Tracker holder = null;
+            FileInputStream on = null;
+            Tracker tracking = null;
         try 
         {
-            in = new FileInputStream("Access_Tracker");
-            ObjectInputStream s = new ObjectInputStream(in);
+            on = new FileInputStream("Access_Tracker");
+            ObjectInputStream r = new ObjectInputStream(on);
 
-            while(in.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
+            while(on.available() > 0)    //Loads each object individually  into ArrayList until essentially end of file
             {
-               holder = (Tracker)s.readObject();
-               track.add(holder);
+               tracking = (Tracker)r.readObject();
+               track.add(tracking);
             } 
         } 
         catch (FileNotFoundException ex) 
@@ -91,7 +93,7 @@ public class FileData {
         {
             try 
             {
-                in.close();
+                on.close();
             } catch (IOException ex) 
             {
                 System.out.println("File failed to close");
@@ -100,16 +102,7 @@ public class FileData {
         }
         else
         System.out.println("No Existing Tracking Data");
-        
-        if(track.contains(name))
-            return track.indexOf(name);
-        else 
-        {
-            Tracker hold = new Tracker(name);
-            track.add(hold);
-            return 0;
-        }
-            
+        return 0;
     }
     //Saves Customer Data to a Byte File
 

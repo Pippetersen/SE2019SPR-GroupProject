@@ -56,6 +56,6 @@ public class Tracker implements Serializable {
     @Override
     public String toString() 
     {
-        return name + "\nAccessed: " + accessed + "+\nEdited: " + edit;
+        return name + "\nAccessed: " + accessed + "\nEdited: " + edit;
     }
 }
