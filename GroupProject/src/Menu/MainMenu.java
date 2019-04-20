@@ -35,7 +35,7 @@ public final class MainMenu implements MenuInterface {
         menuList = new ArrayList<>();
         dbPointer = tempDB;
         
-        if(tempTracker.size() > 0) {
+        if(tempTracker.size() >= 0) {
             trackerList = tempTracker;
         } else {
             trackerList = new ArrayList<>();
@@ -128,6 +128,7 @@ public final class MainMenu implements MenuInterface {
         
         for(int i = 0; i < trackerList.size(); i++) {
                 if(trackerList.get(i).getName().equals(currentUser)) {
+                    trackerList.get(i).FileAccessed();
                     return i;
                 }
         }
