@@ -37,35 +37,41 @@ public class CustomerDB {
     {
         return client;
     }
-    //Search functions for each category that returns Customer object if found, returns null if not
-    public Customer SearchName(String name)
+    //Search functions for each category that returns Customer location object if found, returns -1 if not
+    public int SearchName(String name)
     {
+        int i = 0;
         for(Customer hold : client)
         {
             if(hold.getName().equals(name))
-                return hold;            
+                return i;
+            i++;
         }
-        return null;
+        return -1;
     }
    
-    public Customer SearchNumber(String number)
+    public int SearchNumber(String number)
     {
+        int i = 0;
         for(Customer hold : client)
         {
             if(hold.getNumber().equals(number))
-                return hold;
+                return i;
+            i++;
         }
-        return null;
+        return -1;
     }
     
-        public Customer SearchEmail(String email)
+    public int SearchEmail(String email)
     {
+        int i = 0;
         for(Customer hold : client)
         {
             if(hold.getMail().equals(email))
-                return hold;
+                return i;
+            i++;
         }
-        return null;
+        return -1;
     }
     //Search Funciton that returns ArrayList if looking for Customers that have the same name    
     public ArrayList<Customer> SearchMultiName(String name)

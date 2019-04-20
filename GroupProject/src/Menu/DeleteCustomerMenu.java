@@ -56,7 +56,8 @@ public class DeleteCustomerMenu implements MenuInterface {
         String tempName = STDIN.nextLine();
         int occur = 0;
         for(int i = 0; i < dbPointer.getAll().size(); i++){
-            if(dbPointer.SearchName(tempName) != null) {
+            if(dbPointer.SearchName(tempName) != -1) {
+                i = dbPointer.SearchName(tempName);
                 occur++;
                 dbPointer.deleteCustomer(i);
                 i = 0;
@@ -77,7 +78,8 @@ public class DeleteCustomerMenu implements MenuInterface {
         String tempNum = STDIN.nextLine();
         int occur = 0;
         for(int i = 0; i < dbPointer.getAll().size(); i++){
-            if(dbPointer.SearchName(tempNum) != null) {
+            if(dbPointer.SearchNumber(tempNum) != -1) {
+                i = dbPointer.SearchNumber(tempNum);
                 occur++;
                 dbPointer.deleteCustomer(i);
                 i = 0;
@@ -98,7 +100,8 @@ public class DeleteCustomerMenu implements MenuInterface {
         String tempEmail = STDIN.nextLine();
         int occur = 0;
         for(int i = 0; i < dbPointer.getAll().size(); i++){
-            if(dbPointer.SearchName(tempEmail) != null) {
+            if(dbPointer.SearchEmail(tempEmail) != -1) {
+                i = dbPointer.SearchEmail(tempEmail);
                 occur++;
                 dbPointer.deleteCustomer(i);
                 i = 0;
